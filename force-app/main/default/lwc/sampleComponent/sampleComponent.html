@@ -1,0 +1,26 @@
+<template>
+  <lightning-quick-action-panel header="Sample Action">
+    <p>Record ID: <strong>{recordId}</strong></p>
+    <p>Object: <strong>{objectApiName}</strong></p>
+
+    <div slot="footer">
+      <!-- I want the input to have the value of the recordId -->
+      <!-- How do we handle the input that we get from the text field -->
+      <lightning-input
+        type="text"
+        class="slds-m-bottom_x-small"
+        value={recordId}
+        onchange={handleIputChange}
+      ></lightning-input>
+      <lightning-input type="checkbox" default="true"></lightning-input>
+      <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}>
+      </lightning-button>
+      <lightning-button
+        variant="brand"
+        label="Save"
+        class="slds-m-left_x-small"
+      >
+      </lightning-button>
+    </div>
+  </lightning-quick-action-panel>
+</template>

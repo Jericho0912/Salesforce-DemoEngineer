@@ -1,0 +1,120 @@
+{
+  "type": "sfdc_cms__view",
+  "title": "Login",
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {
+                  "margin": {
+                    "bottom": "",
+                    "left": "",
+                    "right": "",
+                    "top": ""
+                  }
+                },
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\":\"a24b922b-410d-423b-b426-a7abbc940f39\",\"columns\":[{\"UUID\":\"7c1582bc-9b84-44ee-b1f0-8aa315dfaac4\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "alignment": "center",
+                        "imageInfo": "{\"imageInfoV1\":{\"url\":\"/sfsites/c/cms/delivery/media/MC3QXONDWGEBB5VBITLEYCOBH2UU?lastModifiedDate=Sat May 30 11:40:02 GMT 2026\",\"altText\":\"\",\"contentKey\":\"MC3QXONDWGEBB5VBITLEYCOBH2UU\",\"contentType\":null}}",
+                        "imageInfoMobile": "{\"imageInfoV1\":{\"url\":\"\",\"altText\":\"\",\"contentKey\":\"\",\"contentType\":null}}",
+                        "logoWidth": 250
+                      },
+                      "definition": "dxp_content_layout:siteLogo",
+                      "id": "b8d0554c-1dba-48c5-9e67-05d91a8f9796",
+                      "type": "component",
+                      "variations": [
+                        {
+                          "attributes": {
+                            "alignment": "center",
+                            "imageInfo": "{\"imageInfoV1\":{\"url\":\"/sfsites/c/cms/delivery/media/MC3QXONDWGEBB5VBITLEYCOBH2UU?lastModifiedDate=Sat May 30 11:40:02 GMT 2026\",\"altText\":\"\",\"contentKey\":\"MC3QXONDWGEBB5VBITLEYCOBH2UU\",\"contentType\":null}}",
+                            "imageInfoMobile": "{\"imageInfoV1\":{\"url\":\"\",\"altText\":\"\",\"contentKey\":\"MC2CN3B2XQUJEEVB4HPG2UEXJPBQ\",\"contentType\":null}}",
+                            "logoWidth": 250
+                          },
+                          "definition": "dxp_content_layout:siteLogo",
+                          "id": "c375f643-1db1-454e-bc90-c853a60e41b6",
+                          "title": "Desktop login",
+                          "type": "mutationComponent"
+                        }
+                      ]
+                    },
+                    {
+                      "attributes": {
+                        "forgotPasswordLabel": "Forgot your password?",
+                        "forgotPasswordUrl": "/ForgotPassword",
+                        "loginButtonLabel": "Log In",
+                        "passwordLabel": "Password",
+                        "selfRegisterLabel": "Not a member?",
+                        "selfRegisterUrl": "/SelfRegister",
+                        "startUrl": "",
+                        "usernameLabel": "Username"
+                      },
+                      "definition": "community_login:loginForm",
+                      "id": "150f8364-5179-46a8-922f-7d4e837062ab",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "7c1582bc-9b84-44ee-b1f0-8aa315dfaac4",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "a24b922b-410d-423b-b426-a7abbc940f39",
+              "type": "component"
+            }
+          ],
+          "id": "5fb47641-020c-4f87-ad1d-68d97d1e814a",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "pageTitle": "Login",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "06cb34f9-62b7-45c5-ac42-9335e4fa4d72",
+              "type": "component"
+            }
+          ],
+          "id": "0e674a68-e821-4868-910d-e96017e251f3",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "bb7180f6-1c67-4d54-b53c-7f11b8cb57c1",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "IbxTEpdgp6jMwknhOChLDs3Ey4SRNd",
+    "viewType": "login-main"
+  },
+  "urlName": "login"
+}

@@ -1,0 +1,70 @@
+{
+  "type": "sfdc_cms__view",
+  "title": "My Cases",
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\":\"4865ca76-7264-4bb9-b490-2ff90df2fe2d\",\"columns\":[{\"UUID\":\"923c9685-248f-4956-beec-4f98783d1020\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "id": "923c9685-248f-4956-beec-4f98783d1020",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "4865ca76-7264-4bb9-b490-2ff90df2fe2d",
+              "type": "component"
+            }
+          ],
+          "id": "03ff2a32-4d2d-438d-989b-cfbcfe0f143e",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "pageTitle": "My Cases",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "400e5d69-0b0d-4252-a7a7-b605198703b0",
+              "type": "component"
+            }
+          ],
+          "id": "be14c773-f460-4e5e-8565-bd760c0ee817",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "6beeda01-316e-4142-8f74-48a4dc429cd3",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-my-cases"
+  },
+  "urlName": "my-cases"
+}

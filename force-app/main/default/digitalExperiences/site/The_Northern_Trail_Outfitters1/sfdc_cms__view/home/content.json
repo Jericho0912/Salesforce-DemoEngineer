@@ -1,0 +1,91 @@
+{
+  "type": "sfdc_cms__view",
+  "title": "Home",
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\":\"a0a3d7af-2b01-4165-aa29-ccbeceae863f\",\"columns\":[{\"UUID\":\"40f9790b-4fee-4362-83ad-17ee86ad7541\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {},
+                      "definition": "c:ntoHero",
+                      "id": "108c3635-603e-4b09-b952-5a0f8f4809e8",
+                      "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "clientVersion": "WebV1",
+                        "deploymentName": "ESA_Web_Deployment",
+                        "hideChatButtonOnLoad": "Default",
+                        "isExpSiteAuthMode": false,
+                        "scrtUrl": "https://pwc-85f-dev-ed.develop.my.salesforce-scrt.com",
+                        "siteEndpoint": "https://pwc-85f-dev-ed.develop.my.site.com/ESWESAWebDeployment1724800920657"
+                      },
+                      "definition": "experience_messaging:embeddedMessaging",
+                      "id": "b3ec55de-127f-40a2-b346-02d5d88d0f5e",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "40f9790b-4fee-4362-83ad-17ee86ad7541",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "a0a3d7af-2b01-4165-aa29-ccbeceae863f",
+              "type": "component"
+            }
+          ],
+          "id": "8f8de28f-4c07-48d1-8975-76b8428c4bb0",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "pageTitle": "Home",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "92f0e83e-e97d-406e-a59f-03019945c51f",
+              "type": "component"
+            }
+          ],
+          "id": "f075b8b0-c3a6-44b2-a74d-1339360f2664",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "62a49ac2-6c96-4b32-b444-12131b96065c",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "home"
+  },
+  "urlName": "home"
+}

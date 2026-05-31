@@ -1,0 +1,6 @@
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  height: fit-content;
+  font-weight: 700;
+}

@@ -1,0 +1,114 @@
+<template>
+  <div class="cases-container">
+    <div class="section-header">
+      <div class="section-title-row">
+        <div class="section-title-group">
+          <svg
+            class="section-icon"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="currentColor"
+              d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM6 20V4h5v7h7v9H6z"
+            />
+          </svg>
+          <h2 class="section-title">My Cases</h2>
+        </div>
+        <button class="btn-log-case" onclick={handleLogCase}>
+          <svg
+            class="btn-icon"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+          </svg>
+          Log a Case
+        </button>
+      </div>
+      <p class="section-subtitle">Track your support requests</p>
+    </div>
+
+    <!-- Loading -->
+    <template lwc:if={isLoading}>
+      <div class="state-container">
+        <lightning-spinner
+          alternative-text="Loading your cases"
+          size="medium"
+        ></lightning-spinner>
+        <p class="state-text">Loading your cases...</p>
+      </div>
+    </template>
+
+    <!-- Error -->
+    <template lwc:elseif={hasError}>
+      <div class="state-container state-error">
+        <lightning-icon
+          icon-name="utility:error"
+          variant="error"
+          size="small"
+        ></lightning-icon>
+        <p class="state-text">{errorMessage}</p>
+      </div>
+    </template>
+
+    <!-- Cases -->
+    <template lwc:elseif={hasCases}>
+      <ul class="case-list">
+        <template for:each={cases} for:item="caseItem">
+          <li key={caseItem.id} class="case-item">
+            <div class="case-top">
+              <div class="case-info">
+                <span class="case-number">{caseItem.caseNumber}</span>
+                <span class={caseItem.priorityClass}>{caseItem.priority}</span>
+              </div>
+              <span class={caseItem.statusClass}>{caseItem.status}</span>
+            </div>
+            <p class="case-subject" title={caseItem.subject}>
+              {caseItem.subject}
+            </p>
+            <p class="case-date">
+              Opened
+              <lightning-formatted-date-time
+                value={caseItem.createdDate}
+                year="numeric"
+                month="short"
+                day="2-digit"
+              >
+              </lightning-formatted-date-time>
+            </p>
+          </li>
+        </template>
+      </ul>
+    </template>
+
+    <!-- Empty -->
+    <template lwc:else>
+      <div class="state-container state-empty">
+        <svg
+          class="empty-icon"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="currentColor"
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            opacity="0.3"
+          />
+        </svg>
+        <p class="state-heading">All Clear!</p>
+        <p class="state-text">You have no support cases on file.</p>
+        <button class="btn-log-case-empty" onclick={handleLogCase}>
+          <svg
+            class="btn-icon"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+          </svg>
+          Log a New Case
+        </button>
+      </div>
+    </template>
+  </div>
+</template>

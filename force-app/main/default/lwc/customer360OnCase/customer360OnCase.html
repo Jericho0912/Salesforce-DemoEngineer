@@ -1,0 +1,12 @@
+<template>
+  <template lwc:if={hasContact}>
+    <c-customer360 record-id={contactId}></c-customer360>
+  </template>
+  <template lwc:elseif={showNoContact}>
+    <lightning-card title="Customer 360" icon-name="standard:contact">
+      <div class="slds-p-around_medium slds-text-color_weak">
+        This case has no associated contact.
+      </div>
+    </lightning-card>
+  </template>
+</template>

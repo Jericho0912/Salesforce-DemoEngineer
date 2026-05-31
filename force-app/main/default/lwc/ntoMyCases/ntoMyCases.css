@@ -170,6 +170,11 @@
   background: #6b7280;
 }
 
+.priority-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
 /* ── Status Badges ── */
 .status-badge {
   display: inline-block;

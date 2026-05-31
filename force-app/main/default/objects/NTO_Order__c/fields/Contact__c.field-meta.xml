@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact__c</fullName>
+    <description
+  >Owning customer. Lifetime value and order history are rolled up at query time by grouping on this lookup.</description>
+    <label>Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>NTO Orders</relationshipLabel>
+    <relationshipName>NTO_Orders</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

@@ -1,11 +1,11 @@
 /**
  * Why this approach: a standalone portal component that self-resolves the logged-in user's
  * cases via PortalCustomerController.getMyCases() — never accepts a recordId, so a customer
- * can only see their own cases. Includes a "Log a Case" action that navigates to the case
- * creation page (where the NTO_Create_Case Screen Flow is embedded).
+ * can only see their own cases. "Log a Case" launches NTO_Create_Case inline via
+ * lightning-flow; no page navigation, no named-page dependency.
  */
 import { LightningElement, wire } from "lwc";
-import { NavigationMixin } from "lightning/navigation";
+import { refreshApex } from "@salesforce/apex";
 import getMyCases from "@salesforce/apex/PortalCustomerController.getMyCases";
 
 const STATUS_CLASSES = {
@@ -21,13 +21,17 @@ const PRIORITY_CLASSES = {
   Low: "priority-dot priority-low"
 };
 
-export default class NtoMyCases extends NavigationMixin(LightningElement) {
+export default class NtoMyCases extends LightningElement {
+  _wiredCasesResult;
   rawCases;
   error;
   loaded = false;
+  showCaseForm = false;
 
   @wire(getMyCases)
-  wiredCases({ data, error }) {
+  wiredCases(result) {
+    this._wiredCasesResult = result;
+    const { data, error } = result;
     if (data) {
       this.rawCases = data;
       this.error = undefined;
@@ -69,13 +73,18 @@ export default class NtoMyCases extends NavigationMixin(LightningElement) {
   }
 
   handleLogCase() {
-    // Navigate to the case creation page in the Experience Cloud site.
-    // The page should have the NTO_Create_Case Screen Flow embedded.
-    this[NavigationMixin.Navigate]({
-      type: "comm__namedPage",
-      attributes: {
-        name: "Contact_Support__c"
-      }
-    });
+    this.showCaseForm = true;
+  }
+
+  handleCancelCase() {
+    this.showCaseForm = false;
+  }
+
+  handleFlowStatusChange(event) {
+    const { status } = event.detail;
+    if (status === "FINISHED" || status === "FINISHED_SCREEN") {
+      this.showCaseForm = false;
+      refreshApex(this._wiredCasesResult);
+    }
   }
 }

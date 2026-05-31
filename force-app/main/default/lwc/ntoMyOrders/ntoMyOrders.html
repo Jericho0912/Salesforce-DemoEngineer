@@ -61,19 +61,6 @@
               <dl class="nto-order-card__meta slds-m-top_small">
                 <div class="nto-order-card__meta-row">
                   <dt class="slds-text-body_small nto-order-card__meta-label">
-                    Ordered
-                  </dt>
-                  <dd class="slds-text-body_small">
-                    <lightning-formatted-date-time
-                      value={order.orderDate}
-                      year="numeric"
-                      month="short"
-                      day="2-digit"
-                    ></lightning-formatted-date-time>
-                  </dd>
-                </div>
-                <div class="nto-order-card__meta-row">
-                  <dt class="slds-text-body_small nto-order-card__meta-label">
                     Total
                   </dt>
                   <dd class="slds-text-body_regular nto-order-card__total">
@@ -85,15 +72,6 @@
                   </dd>
                 </div>
               </dl>
-
-              <template lwc:if={order.productSummary}>
-                <p
-                  class="nto-order-card__products slds-text-body_small slds-truncate"
-                  title={order.productSummary}
-                >
-                  {order.productSummary}
-                </p>
-              </template>
 
               <div class="nto-order-card__actions slds-m-top_small">
                 <a

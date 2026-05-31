@@ -12,7 +12,7 @@
  *     markup, so the template stays declarative and new statuses are a one-line add.
  */
 import { LightningElement, api, wire } from "lwc";
-import getMyOrders from "@salesforce/apex/OrderController.getMyOrders";
+import getMyOrders from "@salesforce/apex/PortalCustomerController.getMyOrders";
 
 const STATUS_MAP = {
   Processing: {
@@ -45,7 +45,7 @@ export default class NtoMyOrders extends LightningElement {
   _data;
   _error;
 
-  @wire(getMyOrders, { maxRows: "$maxRows" })
+  @wire(getMyOrders)
   wiredOrders({ data, error }) {
     if (data) {
       this._data = data;
@@ -79,7 +79,7 @@ export default class NtoMyOrders extends LightningElement {
    */
   get displayOrders() {
     if (!Array.isArray(this._data)) return [];
-    return this._data.map((order) => {
+    return this._data.slice(0, this.maxRows).map((order) => {
       const decoration = STATUS_MAP[order.status] || FALLBACK_DECORATION;
       return {
         ...order,

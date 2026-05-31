@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description
+  >Returns the customer's NTO orders filtered by status as rich order cards</description>
+    <developerName>Get_NTO_Orders_By_Status</developerName>
+    <invocationTarget>NTOOrderCardService</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_NTO_Orders_By_Status</localDeveloperName>
+    <masterLabel>Get NTO Orders By Status</masterLabel>
+    <progressIndicatorMessage
+  >Pulling up your orders...</progressIndicatorMessage>
+</GenAiFunction>

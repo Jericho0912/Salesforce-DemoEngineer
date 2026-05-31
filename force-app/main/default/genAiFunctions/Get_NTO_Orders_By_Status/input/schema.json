@@ -1,0 +1,15 @@
+{
+  "required": ["status_filter"],
+  "unevaluatedProperties": false,
+  "properties": {
+    "status_filter": {
+      "title": "status_filter",
+      "description": "The order status to filter by. One of: Processing, Shipped, Delivered, Returned.",
+      "lightning:type": "lightning__textType",
+      "lightning:isPII": false,
+      "copilotAction:isUserInput": false,
+      "copilotAction:isUsedByPlanner": true
+    }
+  },
+  "lightning:type": "lightning__objectType"
+}

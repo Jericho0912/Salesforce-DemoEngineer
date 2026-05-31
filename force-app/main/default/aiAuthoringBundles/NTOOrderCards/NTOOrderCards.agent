@@ -1,0 +1,59 @@
+# NTOOrderCards - CLT showcase: render a customer's orders (filtered by status) as rich cards.
+# Built as an employee agent so the cards render in the Agent Builder preview without a
+# community login. The identical action/CLT chain drops into the customer Service Agent on
+# the portal; only the contact-resolution surface differs (see NTOOrderCardService).
+
+config:
+   developer_name: "NTOOrderCards"
+   agent_label: "NTO Order Cards"
+   agent_type: "AgentforceEmployeeAgent"
+   description: "Shows a customer's NTO orders filtered by status as rich Custom Lightning Type cards"
+
+system:
+   messages:
+      welcome: "Hi! Ask me to show your orders by status - e.g. 'show my orders in transit'."
+      error: "Something went wrong pulling up your orders. Please try again."
+   instructions: "You help NTO customers view their own orders, filtered by status, displayed as rich cards."
+
+start_agent order_router:
+   description: "Route order-by-status requests"
+
+   reasoning:
+      instructions: |
+         Select the tool that best matches the user's message and conversation history. If it is unclear, make your best guess.
+      actions:
+         show_orders: @utils.transition to @subagent.order_cards
+            description: "Route any request to view the customer's orders by status (in transit, delivered, returned, processing)."
+
+subagent order_cards:
+   description: "Resolves the requested status and displays the customer's matching orders as cards"
+
+   reasoning:
+      instructions: |
+         Map the customer's wording to exactly one status value: "in transit", "on the way", "shipped" -> "Shipped"; "delivered", "arrived", "received" -> "Delivered"; "returned", "sent back" -> "Returned"; "processing", "being prepared", "not shipped yet" -> "Processing". Call {!@actions.getOrdersByStatus} with status_filter set to that single value, then display the orders_result cards. Do NOT restate the orders in text and do NOT output any extra text.
+      actions:
+         getOrdersByStatus: @actions.getOrdersByStatus
+            with status_filter = ...
+
+   actions:
+      getOrdersByStatus:
+         description: "Returns the customer's NTO orders filtered by status"
+         inputs:
+            status_filter: string
+               description: "The order status to filter by: Processing, Shipped, Delivered, or Returned"
+               label: "status_filter"
+               is_required: True
+               is_user_input: False
+         outputs:
+            orders_result: object
+               description: "The matching orders for display as cards"
+               label: "orders_result"
+               complex_data_type_name: "c__ntoOrderList"
+               filter_from_agent: False
+               is_displayable: True
+         target: "apex://NTOOrderCardService"
+         label: "Get NTO Orders By Status"
+         require_user_confirmation: False
+         include_in_progress_indicator: True
+         progress_indicator_message: "Pulling up your orders..."
+         source: "Get_NTO_Orders_By_Status"

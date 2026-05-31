@@ -1,0 +1,5 @@
+{
+  "title": "NTO Order List",
+  "description": "A customer's NTO orders filtered by status, for rich card display",
+  "lightning:type": "@apexClassType/c__NTOOrderCardService$OrderCardList"
+}

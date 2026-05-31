@@ -4,11 +4,43 @@
   >Grants portal customer users access to submit/view their own Cases, read Orders and Products. Assign to all NTO portal users after creation.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>NTO Portal Customer</label>
+    <classAccesses>
+        <apexClass>NTOOrderCardService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PortalCustomerController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <fieldPermissions>
+        <field>NTO_Order__c.Contact__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>NTO_Order__c.Total__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Product2.Image_Url__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
     <objectPermissions>
         <object>Case</object>
         <allowRead>true</allowRead>
         <allowCreate>true</allowCreate>
         <allowEdit>true</allowEdit>
+        <allowDelete>false</allowDelete>
+        <viewAllRecords>false</viewAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <object>NTO_Order__c</object>
+        <allowRead>true</allowRead>
+        <allowCreate>false</allowCreate>
+        <allowEdit>false</allowEdit>
         <allowDelete>false</allowDelete>
         <viewAllRecords>false</viewAllRecords>
         <modifyAllRecords>false</modifyAllRecords>
@@ -32,26 +64,21 @@
         <modifyAllRecords>false</modifyAllRecords>
     </objectPermissions>
     <objectPermissions>
-        <object>Product2</object>
-        <allowRead>true</allowRead>
-        <allowCreate>false</allowCreate>
-        <allowEdit>false</allowEdit>
-        <allowDelete>false</allowDelete>
-        <viewAllRecords>true</viewAllRecords>
-        <modifyAllRecords>false</modifyAllRecords>
-    </objectPermissions>
-    <objectPermissions>
         <object>Pricebook2</object>
         <allowRead>true</allowRead>
         <allowCreate>false</allowCreate>
         <allowEdit>false</allowEdit>
         <allowDelete>false</allowDelete>
-        <viewAllRecords>true</viewAllRecords>
+        <viewAllRecords>false</viewAllRecords>
         <modifyAllRecords>false</modifyAllRecords>
     </objectPermissions>
-    <fieldPermissions>
-        <field>Product2.Image_Url__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
+    <objectPermissions>
+        <object>Product2</object>
+        <allowRead>true</allowRead>
+        <allowCreate>false</allowCreate>
+        <allowEdit>false</allowEdit>
+        <allowDelete>false</allowDelete>
+        <viewAllRecords>false</viewAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
+    </objectPermissions>
 </PermissionSet>

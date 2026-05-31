@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>NTO Featured Gear</masterLabel>
+    <description
+  >Featured product carousel/grid sourced from active Standard PricebookEntries.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+        name="maxRows"
+        type="Integer"
+        label="Number of products"
+        description="How many gear cards to display. Defaults to 4."
+        default="4"
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

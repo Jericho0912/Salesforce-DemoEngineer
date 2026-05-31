@@ -1,0 +1,86 @@
+:host {
+  display: block;
+  color: var(--slds-g-color-neutral-base-10, inherit);
+}
+
+.nto-featured-gear__panel {
+  background-color: var(--slds-g-color-neutral-base-95);
+  border: 1px solid var(--slds-g-color-border-base-1);
+  border-radius: var(--slds-g-radius-border-2, 0.25rem);
+}
+
+.nto-featured-gear__panel_error {
+  background-color: var(
+    --slds-g-color-error-container-1,
+    var(--slds-g-color-neutral-base-95)
+  );
+  border-color: var(
+    --slds-g-color-border-error-1,
+    var(--slds-g-color-border-base-1)
+  );
+}
+
+.nto-featured-gear__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--slds-g-color-neutral-base-100, transparent);
+  border: 1px solid var(--slds-g-color-border-base-1);
+  border-radius: var(--slds-g-radius-border-2, 0.25rem);
+  transition: box-shadow 150ms ease-in-out;
+}
+
+.nto-featured-gear__card:hover {
+  box-shadow: var(--slds-g-shadow-2, 0 2px 8px rgba(0, 0, 0, 0.08));
+}
+
+.nto-featured-gear__media {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 aspect ratio container */
+  overflow: hidden;
+  background-color: var(--slds-g-color-neutral-base-95);
+  border-radius: var(--slds-g-radius-border-1, 0.125rem);
+}
+
+.nto-featured-gear__image,
+.nto-featured-gear__placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nto-featured-gear__image {
+  object-fit: cover;
+  display: block;
+}
+
+.nto-featured-gear__placeholder {
+  background: linear-gradient(
+    135deg,
+    var(--slds-g-color-neutral-base-95),
+    var(--slds-g-color-neutral-base-90)
+  );
+}
+
+.nto-featured-gear__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.nto-featured-gear__name {
+  color: var(--slds-g-color-neutral-base-10, inherit);
+}
+
+.nto-featured-gear__family {
+  color: var(--slds-g-color-neutral-base-30, inherit);
+}
+
+.nto-featured-gear__price {
+  margin-top: auto;
+  color: var(--slds-g-color-neutral-base-10, inherit);
+  font-weight: var(--slds-g-font-weight-bold, 700);
+}

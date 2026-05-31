@@ -1,0 +1,125 @@
+<template>
+  <div class="nto-my-orders">
+    <header class="nto-my-orders__header slds-m-bottom_small">
+      <h2 class="slds-text-heading_medium nto-my-orders__title">My Orders</h2>
+      <p class="slds-text-body_small nto-my-orders__subtitle">
+        Your most recent purchases.
+      </p>
+    </header>
+
+    <template lwc:if={isLoading}>
+      <div class="nto-my-orders__state" role="status">
+        <lightning-spinner
+          alternative-text="Loading your orders"
+          size="small"
+        ></lightning-spinner>
+      </div>
+    </template>
+
+    <template lwc:elseif={hasError}>
+      <div
+        class="nto-my-orders__state nto-my-orders__state_error slds-box slds-theme_error"
+        role="alert"
+      >
+        <lightning-icon
+          icon-name="utility:error"
+          alternative-text="Error"
+          size="small"
+        ></lightning-icon>
+        <p class="slds-m-left_x-small">{errorMessage}</p>
+      </div>
+    </template>
+
+    <template lwc:elseif={hasOrders}>
+      <div class="slds-grid slds-wrap slds-gutters_small">
+        <template for:each={displayOrders} for:item="order">
+          <div
+            key={order.key}
+            class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-large-size_1-of-4 slds-p-bottom_small"
+          >
+            <article class="nto-order-card slds-box slds-box_small">
+              <div
+                class="nto-order-card__top slds-grid slds-grid_align-spread slds-grid_vertical-align-center"
+              >
+                <span class="nto-order-card__number slds-text-title_caps"
+                  >{order.orderNumber}</span
+                >
+                <span class={order.badgeClass}>
+                  <span class={order.dotClass} aria-hidden="true"></span>
+                  <span class="nto-order-card__status-label"
+                    >{order.status}</span
+                  >
+                </span>
+              </div>
+
+              <p
+                class="nto-order-card__fulfilment slds-text-body_small slds-m-top_x-small"
+              >
+                {order.statusText}
+              </p>
+
+              <dl class="nto-order-card__meta slds-m-top_small">
+                <div class="nto-order-card__meta-row">
+                  <dt class="slds-text-body_small nto-order-card__meta-label">
+                    Ordered
+                  </dt>
+                  <dd class="slds-text-body_small">
+                    <lightning-formatted-date-time
+                      value={order.orderDate}
+                      year="numeric"
+                      month="short"
+                      day="2-digit"
+                    ></lightning-formatted-date-time>
+                  </dd>
+                </div>
+                <div class="nto-order-card__meta-row">
+                  <dt class="slds-text-body_small nto-order-card__meta-label">
+                    Total
+                  </dt>
+                  <dd class="slds-text-body_regular nto-order-card__total">
+                    <lightning-formatted-number
+                      value={order.total}
+                      format-style="currency"
+                      currency-code="USD"
+                    ></lightning-formatted-number>
+                  </dd>
+                </div>
+              </dl>
+
+              <template lwc:if={order.productSummary}>
+                <p
+                  class="nto-order-card__products slds-text-body_small slds-truncate"
+                  title={order.productSummary}
+                >
+                  {order.productSummary}
+                </p>
+              </template>
+
+              <div class="nto-order-card__actions slds-m-top_small">
+                <a
+                  href="javascript:void(0)"
+                  class="nto-order-card__link"
+                  onclick={handleViewOrder}
+                  >View order</a
+                >
+              </div>
+            </article>
+          </div>
+        </template>
+      </div>
+    </template>
+
+    <template lwc:else>
+      <div
+        class="nto-my-orders__state nto-my-orders__state_empty slds-box slds-box_xx-small"
+      >
+        <p class="slds-text-heading_small nto-my-orders__empty-title">
+          No orders yet
+        </p>
+        <p class="slds-text-body_small">
+          You don't have any orders yet. When you do, they'll show up here.
+        </p>
+      </div>
+    </template>
+  </div>
+</template>

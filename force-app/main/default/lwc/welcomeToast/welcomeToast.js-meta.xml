@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>NTO Welcome Toast</masterLabel>
+    <description
+  >Earth-tone welcome banner for the NTO Experience Cloud home page. Auto-dismisses.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+        name="autoDismissMs"
+        type="Integer"
+        label="Auto-dismiss delay (ms)"
+        description="How long before the banner auto-dismisses."
+        default="5000"
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

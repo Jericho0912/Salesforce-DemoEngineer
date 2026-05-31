@@ -1,0 +1,42 @@
+:host {
+  /* Earth-tone palette driven entirely by SLDS styling hooks.
+       No hardcoded hex values — inherits from the site theme. */
+  --nto-welcome-bg: var(
+    --slds-g-color-neutral-base-95,
+    var(--slds-g-color-surface-1, transparent)
+  );
+  --nto-welcome-text: var(
+    --slds-g-color-neutral-base-10,
+    var(--slds-g-color-on-surface-1, inherit)
+  );
+  --nto-welcome-border: var(
+    --slds-g-color-border-base-2,
+    var(--slds-g-color-border-1, currentColor)
+  );
+  --nto-welcome-radius: var(--slds-g-radius-border-2, 0.25rem);
+  --nto-welcome-spacing: var(--slds-g-spacing-2, 0.75rem);
+
+  display: block;
+}
+
+.nto-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nto-welcome-spacing);
+  padding: var(--nto-welcome-spacing) calc(var(--nto-welcome-spacing) * 1.25);
+  background-color: var(--nto-welcome-bg);
+  color: var(--nto-welcome-text);
+  border: 1px solid var(--nto-welcome-border);
+  border-radius: var(--nto-welcome-radius);
+}
+
+.nto-welcome__message {
+  font-weight: var(--slds-g-font-weight-bold-7, 600);
+  line-height: 1.4;
+}
+
+.nto-welcome__close {
+  flex: 0 0 auto;
+  color: var(--nto-welcome-text);
+}

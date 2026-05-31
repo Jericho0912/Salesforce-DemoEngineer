@@ -1,0 +1,88 @@
+<template>
+  <div class="nto-featured-gear slds-p-around_medium">
+    <template if:true={isLoading}>
+      <div
+        class="nto-featured-gear__loading slds-is-relative slds-p-vertical_x-large"
+      >
+        <lightning-spinner
+          alternative-text="Loading featured gear"
+          size="medium"
+        ></lightning-spinner>
+      </div>
+    </template>
+
+    <template if:true={hasError}>
+      <div
+        class="nto-featured-gear__panel nto-featured-gear__panel_error slds-p-around_medium slds-box"
+        role="alert"
+      >
+        <p class="slds-text-heading_small slds-m-bottom_x-small">
+          We couldn&rsquo;t load featured gear.
+        </p>
+        <p class="slds-text-body_regular">{errorMessage}</p>
+      </div>
+    </template>
+
+    <template if:true={isEmpty}>
+      <div
+        class="nto-featured-gear__panel nto-featured-gear__panel_empty slds-p-around_medium slds-box"
+      >
+        <p class="slds-text-body_regular">Featured gear is on its way.</p>
+      </div>
+    </template>
+
+    <template if:true={hasData}>
+      <div class="slds-grid slds-wrap slds-gutters">
+        <template for:each={cards} for:item="item">
+          <div
+            key={item.key}
+            class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-large-size_1-of-4 slds-p-around_x-small"
+          >
+            <article class="nto-featured-gear__card slds-box slds-box_x-small">
+              <div class="nto-featured-gear__media">
+                <template if:true={item.imageUrl}>
+                  <img
+                    class="nto-featured-gear__image"
+                    src={item.imageUrl}
+                    alt={item.name}
+                  />
+                </template>
+                <template if:false={item.imageUrl}>
+                  <div
+                    class="nto-featured-gear__placeholder"
+                    aria-hidden="true"
+                  ></div>
+                </template>
+              </div>
+              <div class="nto-featured-gear__body slds-p-top_small">
+                <h3
+                  class="nto-featured-gear__name slds-text-heading_small slds-truncate"
+                  title={item.name}
+                >
+                  {item.name}
+                </h3>
+                <template if:true={item.family}>
+                  <p
+                    class="nto-featured-gear__family slds-text-body_small slds-truncate"
+                    title={item.family}
+                  >
+                    {item.family}
+                  </p>
+                </template>
+                <p
+                  class="nto-featured-gear__price slds-text-heading_x-small slds-m-top_x-small"
+                >
+                  <lightning-formatted-number
+                    value={item.price}
+                    format-style="currency"
+                    currency-code="USD"
+                  ></lightning-formatted-number>
+                </p>
+              </div>
+            </article>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</template>

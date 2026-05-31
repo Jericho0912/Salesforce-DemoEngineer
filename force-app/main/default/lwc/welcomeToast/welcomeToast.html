@@ -1,0 +1,19 @@
+<template>
+  <template if:true={visible}>
+    <div
+      class="nto-welcome slds-notify slds-notify_alert slds-theme_alert-texture"
+      role="status"
+      aria-live="polite"
+    >
+      <span class="nto-welcome__message">{greeting}</span>
+      <lightning-button-icon
+        class="nto-welcome__close"
+        icon-name="utility:close"
+        variant="bare"
+        alternative-text="Dismiss welcome banner"
+        title="Dismiss"
+        onclick={handleDismissClick}
+      ></lightning-button-icon>
+    </div>
+  </template>
+</template>

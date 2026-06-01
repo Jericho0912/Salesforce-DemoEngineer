@@ -1,18 +1,15 @@
-/**
- * Why this approach: a standalone portal component that self-resolves the logged-in user's
- * cases via PortalCustomerController.getMyCases() — never accepts a recordId, so a customer
- * can only see their own cases. "Log a Case" launches NTO_Create_Case inline via
- * lightning-flow; no page navigation, no named-page dependency.
- */
 import { LightningElement, wire } from "lwc";
 import { refreshApex } from "@salesforce/apex";
 import getMyCases from "@salesforce/apex/PortalCustomerController.getMyCases";
 
+// Wire returns: id, caseNumber, subject, status, priority, createdDate, isClosed.
+// No controller changes made.
+
 const STATUS_CLASSES = {
-  New: "status-badge status-new",
-  Working: "status-badge status-working",
-  Escalated: "status-badge status-escalated",
-  Closed: "status-badge status-closed"
+  New: "nto-case-pill nto-case-pill_new",
+  Working: "nto-case-pill nto-case-pill_working",
+  Escalated: "nto-case-pill nto-case-pill_escalated",
+  Closed: "nto-case-pill nto-case-pill_closed"
 };
 
 const PRIORITY_CLASSES = {
@@ -21,12 +18,27 @@ const PRIORITY_CLASSES = {
   Low: "priority-dot priority-low"
 };
 
+function formatOpenedDate(dateStr) {
+  if (!dateStr) return "";
+  try {
+    return new Intl.DateTimeFormat(navigator.language || "en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric"
+    }).format(new Date(dateStr));
+  } catch {
+    return "";
+  }
+}
+
 export default class NtoMyCases extends LightningElement {
   _wiredCasesResult;
   rawCases;
   error;
   loaded = false;
   showCaseForm = false;
+  _activeStatusFilter = "All";
+  _caseSearch = "";
 
   @wire(getMyCases)
   wiredCases(result) {
@@ -59,17 +71,70 @@ export default class NtoMyCases extends LightningElement {
     return "We could not load your cases right now. Please try again later.";
   }
 
-  get cases() {
-    if (!this.rawCases) return [];
-    return this.rawCases.map((c) => ({
-      ...c,
-      statusClass: STATUS_CLASSES[c.status] || "status-badge status-new",
-      priorityClass: PRIORITY_CLASSES[c.priority] || "priority-dot priority-low"
+  get statusFilterOptions() {
+    return [
+      { label: "All", value: "All" },
+      { label: "Open", value: "New" },
+      { label: "Working", value: "Working" },
+      { label: "Escalated", value: "Escalated" },
+      { label: "Closed", value: "Closed" }
+    ].map((o) => ({
+      ...o,
+      cls:
+        o.value === this._activeStatusFilter
+          ? "nto-filter-chip nto-filter-chip_active"
+          : "nto-filter-chip"
     }));
   }
 
+  get cases() {
+    if (!this.rawCases) return [];
+    return this.rawCases.map((c) => {
+      const subjectTrimmed = c.subject && c.subject.trim();
+      return {
+        ...c,
+        displaySubject: subjectTrimmed || "Untitled case",
+        isUntitled: !subjectTrimmed,
+        subjectClass: subjectTrimmed
+          ? "case-subject"
+          : "case-subject case-subject_untitled",
+        openedLabel: c.createdDate
+          ? "Opened " + formatOpenedDate(c.createdDate)
+          : "",
+        statusClass:
+          STATUS_CLASSES[c.status] || "nto-case-pill nto-case-pill_new",
+        priorityClass:
+          PRIORITY_CLASSES[c.priority] || "priority-dot priority-low"
+      };
+    });
+  }
+
+  get filteredCases() {
+    let cases = this.cases;
+    if (this._activeStatusFilter !== "All") {
+      cases = cases.filter((c) => c.status === this._activeStatusFilter);
+    }
+    const q = this._caseSearch.trim().toLowerCase();
+    if (q) {
+      cases = cases.filter(
+        (c) =>
+          (c.caseNumber && c.caseNumber.toLowerCase().includes(q)) ||
+          (c.subject && c.subject.toLowerCase().includes(q))
+      );
+    }
+    return cases;
+  }
+
   get hasCases() {
-    return this.cases && this.cases.length > 0;
+    return this.filteredCases && this.filteredCases.length > 0;
+  }
+
+  handleStatusFilterClick(event) {
+    this._activeStatusFilter = event.currentTarget.dataset.value;
+  }
+
+  handleCaseSearch(event) {
+    this._caseSearch = event.target.value;
   }
 
   handleLogCase() {

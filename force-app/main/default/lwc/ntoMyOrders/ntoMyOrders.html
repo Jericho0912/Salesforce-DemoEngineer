@@ -1,10 +1,9 @@
 <template>
   <div class="nto-my-orders">
-    <header class="nto-my-orders__header slds-m-bottom_small">
-      <h2 class="slds-text-heading_medium nto-my-orders__title">My Orders</h2>
-      <p class="slds-text-body_small nto-my-orders__subtitle">
-        Your most recent purchases.
-      </p>
+    <!-- Section header -->
+    <header class="nto-my-orders__header">
+      <h2 class="nto-my-orders__title">My Orders</h2>
+      <p class="nto-my-orders__subtitle">Your most recent purchases.</p>
     </header>
 
     <template lwc:if={isLoading}>
@@ -17,10 +16,7 @@
     </template>
 
     <template lwc:elseif={hasError}>
-      <div
-        class="nto-my-orders__state nto-my-orders__state_error slds-box slds-theme_error"
-        role="alert"
-      >
+      <div class="nto-my-orders__state nto-my-orders__state_error" role="alert">
         <lightning-icon
           icon-name="utility:error"
           alternative-text="Error"
@@ -31,72 +27,107 @@
     </template>
 
     <template lwc:elseif={hasOrders}>
-      <div class="slds-grid slds-wrap slds-gutters_small">
-        <template for:each={displayOrders} for:item="order">
-          <div
-            key={order.key}
-            class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-large-size_1-of-4 slds-p-bottom_small"
+      <!-- Filter row -->
+      <div class="nto-my-orders__controls">
+        <div class="nto-filter-chips" role="group" aria-label="Filter orders">
+          <template for:each={filterOptions} for:item="opt">
+            <button
+              key={opt.value}
+              class={opt.cls}
+              data-value={opt.value}
+              onclick={handleFilterClick}
+              type="button"
+            >
+              {opt.label}
+            </button>
+          </template>
+        </div>
+        <div class="nto-my-orders__search-wrap">
+          <label class="slds-assistive-text" for="orders-search"
+            >Search orders by number</label
           >
-            <article class="nto-order-card slds-box slds-box_small">
-              <div
-                class="nto-order-card__top slds-grid slds-grid_align-spread slds-grid_vertical-align-center"
-              >
-                <span class="nto-order-card__number slds-text-title_caps"
-                  >{order.orderNumber}</span
-                >
-                <span class={order.badgeClass}>
-                  <span class={order.dotClass} aria-hidden="true"></span>
-                  <span class="nto-order-card__status-label"
-                    >{order.status}</span
-                  >
-                </span>
+          <input
+            id="orders-search"
+            type="search"
+            class="nto-my-orders__search"
+            placeholder="Search order #"
+            value={_searchQuery}
+            oninput={handleSearch}
+          />
+        </div>
+      </div>
+
+      <!-- Order grid -->
+      <template lwc:if={hasFilteredOrders}>
+        <div class="nto-orders-grid">
+          <template for:each={filteredOrders} for:item="order">
+            <article key={order.key} class="nto-order-card">
+              <!-- Top: order number + status pill -->
+              <div class="nto-order-card__top">
+                <span class="nto-order-card__number">{order.orderNumber}</span>
+                <span class={order.pillClass}>{order.status}</span>
               </div>
 
-              <p
-                class="nto-order-card__fulfilment slds-text-body_small slds-m-top_x-small"
-              >
-                {order.statusText}
+              <!-- Total -->
+              <p class="nto-order-card__total">
+                <lightning-formatted-number
+                  value={order.total}
+                  format-style="currency"
+                  currency-code="USD"
+                ></lightning-formatted-number>
               </p>
 
-              <dl class="nto-order-card__meta slds-m-top_small">
-                <div class="nto-order-card__meta-row">
-                  <dt class="slds-text-body_small nto-order-card__meta-label">
-                    Total
-                  </dt>
-                  <dd class="slds-text-body_regular nto-order-card__total">
-                    <lightning-formatted-number
-                      value={order.total}
-                      format-style="currency"
-                      currency-code="USD"
-                    ></lightning-formatted-number>
-                  </dd>
-                </div>
-              </dl>
+              <!-- Fulfilment text -->
+              <p class="nto-order-card__status-text">{order.statusText}</p>
 
-              <div class="nto-order-card__actions slds-m-top_small">
+              <!-- Actions -->
+              <div class="nto-order-card__actions">
                 <a
                   href="javascript:void(0)"
-                  class="nto-order-card__link"
+                  class="nto-order-card__action-link nto-order-card__action-link_primary"
                   onclick={handleViewOrder}
-                  >View order</a
                 >
+                  View details
+                </a>
+                <button
+                  type="button"
+                  class="nto-order-card__action-link nto-order-card__action-link_secondary"
+                  onclick={handleReturnItem}
+                >
+                  Return an item
+                </button>
               </div>
             </article>
-          </div>
-        </template>
-      </div>
+          </template>
+        </div>
+      </template>
+      <template lwc:else>
+        <p class="nto-my-orders__no-results">No orders match that filter.</p>
+      </template>
     </template>
 
     <template lwc:else>
-      <div
-        class="nto-my-orders__state nto-my-orders__state_empty slds-box slds-box_xx-small"
-      >
-        <p class="slds-text-heading_small nto-my-orders__empty-title">
-          No orders yet
+      <div class="nto-my-orders__state nto-my-orders__state_empty">
+        <svg
+          viewBox="0 0 24 24"
+          class="nto-my-orders__empty-icon"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 14H4V8l8 5 8-5v10zm0-12l-8 5-8-5V6h16v0z"
+          />
+        </svg>
+        <p class="nto-my-orders__empty-title">
+          No orders yet — let&rsquo;s change that.
         </p>
-        <p class="slds-text-body_small">
-          You don't have any orders yet. When you do, they'll show up here.
-        </p>
+        <button
+          type="button"
+          class="nto-my-orders__home-link"
+          onclick={handleGoHome}
+        >
+          Explore gear
+        </button>
       </div>
     </template>
   </div>

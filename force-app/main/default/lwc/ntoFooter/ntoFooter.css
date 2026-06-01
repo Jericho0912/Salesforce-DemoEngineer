@@ -1,62 +1,41 @@
-/*
- * NTO Footer — earthy palette via CSS custom properties + SLDS global hooks.
- * Override --nto-footer-* in the Experience Builder Brand panel to match the
- * site theme without touching this file.
- */
+@import "c/ntoBrandTokens";
 
 :host {
   display: block;
-
-  /* Palette — falls back to SLDS neutral scale when not themed */
-  --nto-footer-bg: var(--slds-g-color-neutral-base-10);
-  --nto-footer-bottom-bg: var(
-    --slds-g-color-neutral-base-5,
-    var(--slds-g-color-neutral-base-10)
-  );
-  --nto-footer-border: var(--slds-g-color-neutral-base-20);
-  --nto-footer-heading: var(--slds-g-color-neutral-base-100);
-  --nto-footer-text: var(--slds-g-color-neutral-base-60);
-  --nto-footer-link: var(--slds-g-color-neutral-base-60);
-  --nto-footer-link-hover: var(--slds-g-color-neutral-base-100);
-  --nto-footer-input-bg: var(--slds-g-color-neutral-base-20);
-  --nto-footer-input-border: var(--slds-g-color-neutral-base-30);
-  --nto-footer-btn-bg: var(--slds-g-color-brand-base-50);
-  --nto-footer-btn-text: var(--slds-g-color-neutral-base-100);
-  --nto-footer-social: var(--slds-g-color-neutral-base-50);
-  --nto-footer-social-hover: var(--slds-g-color-neutral-base-100);
+  font-family: var(--nto-font-sans);
 }
 
 .nto-footer {
-  background: var(--nto-footer-bg);
-  color: var(--nto-footer-text);
-  font-family: var(--slds-g-font-family-sans, system-ui, sans-serif);
+  background: var(--nto-forest-900);
+  color: var(--nto-cream-100);
 }
 
 .nto-footer__inner {
   max-width: 72rem;
   margin: 0 auto;
-  padding: var(--slds-g-spacing-xx-large, 2.5rem)
-    var(--slds-g-spacing-large, 1.5rem) var(--slds-g-spacing-large, 1.5rem);
+  padding: var(--nto-space-xl) var(--nto-space-lg) var(--nto-space-lg);
 }
 
 .nto-footer__col {
-  margin-bottom: var(--slds-g-spacing-large, 1.5rem);
+  margin-bottom: var(--nto-space-lg);
 }
 
 /* ── Brand ── */
 
 .nto-footer__wordmark {
+  font-family: var(--nto-font-serif);
   font-size: 1.875rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  color: var(--nto-footer-heading);
-  margin: 0 0 var(--slds-g-spacing-x-small, 0.5rem) 0;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--nto-cream-50);
+  margin: 0 0 var(--nto-space-xs) 0;
   line-height: 1;
 }
 
 .nto-footer__tagline {
   font-size: 0.85rem;
-  color: var(--nto-footer-text);
+  color: var(--nto-cream-100);
+  opacity: 0.8;
   margin: 0;
   line-height: 1.4;
 }
@@ -64,12 +43,12 @@
 /* ── Nav columns ── */
 
 .nto-footer__heading {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--nto-footer-heading);
-  margin: 0 0 var(--slds-g-spacing-small, 0.75rem) 0;
+  color: var(--nto-cream-50);
+  margin: 0 0 var(--nto-space-sm) 0;
 }
 
 .nto-footer__list {
@@ -78,137 +57,182 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--slds-g-spacing-x-small, 0.5rem);
+  gap: 0.5rem;
 }
 
 .nto-footer__link {
   font-size: 0.875rem;
-  color: var(--nto-footer-link);
+  color: var(--nto-cream-100);
   text-decoration: none;
-  transition: color 0.15s ease;
+  opacity: 0.8;
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
 }
 .nto-footer__link:hover,
 .nto-footer__link:focus {
-  color: var(--nto-footer-link-hover);
+  color: var(--nto-orange-500);
+  opacity: 1;
   text-decoration: underline;
+}
+.nto-footer__link:focus-visible {
+  outline: none;
+  box-shadow: var(--nto-focus-ring);
+  border-radius: 2px;
 }
 
 /* ── Newsletter ── */
 
 .nto-footer__cta-text {
   font-size: 0.85rem;
-  color: var(--nto-footer-text);
-  margin: 0 0 var(--slds-g-spacing-small, 0.75rem) 0;
+  color: var(--nto-cream-100);
+  opacity: 0.8;
+  margin: 0 0 var(--nto-space-sm) 0;
 }
 
 .nto-footer__newsletter {
   display: flex;
-  gap: var(--slds-g-spacing-x-small, 0.5rem);
-  margin-bottom: var(--slds-g-spacing-medium, 1rem);
+  gap: 0.5rem;
+  margin-bottom: var(--nto-space-md);
 }
 
 .nto-footer__email-input {
   flex: 1;
   min-width: 0;
   padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  border: 1px solid var(--nto-footer-input-border);
-  background: var(--nto-footer-input-bg);
-  color: var(--nto-footer-heading);
+  border-radius: var(--nto-radius-sm);
+  border: 1px solid var(--nto-forest-700);
+  background: var(--nto-forest-700);
+  color: var(--nto-cream-50);
   font-size: 0.85rem;
-  outline: none;
+  font-family: var(--nto-font-sans);
+  min-height: 44px;
 }
 .nto-footer__email-input::placeholder {
-  color: var(--nto-footer-text);
+  color: var(--nto-cream-100);
+  opacity: 0.5;
 }
 .nto-footer__email-input:focus {
-  border-color: var(--nto-footer-btn-bg);
-  box-shadow: 0 0 0 2px var(--nto-footer-btn-bg);
+  outline: none;
+  border-color: var(--nto-orange-500);
+  box-shadow: var(--nto-focus-ring);
 }
 
 .nto-footer__subscribe-btn {
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--nto-radius-sm);
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-  background: var(--nto-footer-btn-bg);
-  color: var(--nto-footer-btn-text);
-  transition: opacity 0.15s ease;
+  background: var(--nto-orange-500);
+  color: #fff;
+  min-height: 44px;
+  font-family: var(--nto-font-sans);
+  transition: background 0.15s ease;
 }
 .nto-footer__subscribe-btn:hover {
-  opacity: 0.85;
+  background: var(--nto-orange-600);
+}
+.nto-footer__subscribe-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--nto-focus-ring);
 }
 
-/* ── Social icons ── */
+/* ── Social icons (stroke style) ── */
 
 .nto-footer__social {
   display: flex;
-  gap: var(--slds-g-spacing-small, 0.75rem);
+  gap: var(--nto-space-sm);
   align-items: center;
 }
 
 .nto-footer__social-link {
-  color: var(--nto-footer-social);
-  transition: color 0.15s ease;
+  color: var(--nto-cream-100);
+  opacity: 0.7;
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
   line-height: 0;
   text-decoration: none;
 }
 .nto-footer__social-link:hover {
-  color: var(--nto-footer-social-hover);
+  color: var(--nto-orange-500);
+  opacity: 1;
+}
+.nto-footer__social-link:focus-visible {
+  outline: none;
+  box-shadow: var(--nto-focus-ring);
+  border-radius: 4px;
 }
 
 .nto-footer__social-icon {
   width: 1.25rem;
   height: 1.25rem;
   display: block;
+  /* stroke style — override fill to none and use stroke */
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ── Bottom bar ── */
 
 .nto-footer__bottom-wrap {
-  border-top: 1px solid var(--nto-footer-border);
-  background: var(--nto-footer-bottom-bg);
+  border-top: 1px solid var(--nto-forest-700);
+  background: var(--nto-forest-900);
 }
 
 .nto-footer__bottom {
   max-width: 72rem;
   margin: 0 auto;
-  padding: var(--slds-g-spacing-medium, 1rem)
-    var(--slds-g-spacing-large, 1.5rem);
+  padding: var(--nto-space-md) var(--nto-space-lg);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--slds-g-spacing-x-small, 0.5rem);
+  gap: 0.5rem;
 }
 
 .nto-footer__copyright {
   font-size: 0.8rem;
-  color: var(--nto-footer-text);
+  color: var(--nto-cream-100);
+  opacity: 0.6;
   margin: 0;
 }
 
 .nto-footer__legal {
   display: flex;
   align-items: center;
-  gap: var(--slds-g-spacing-x-small, 0.5rem);
+  gap: 0.5rem;
 }
 
 .nto-footer__legal-link {
   font-size: 0.8rem;
-  color: var(--nto-footer-link);
+  color: var(--nto-cream-100);
+  opacity: 0.6;
   text-decoration: none;
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
 }
 .nto-footer__legal-link:hover {
-  color: var(--nto-footer-link-hover);
+  color: var(--nto-orange-500);
+  opacity: 1;
   text-decoration: underline;
+}
+.nto-footer__legal-link:focus-visible {
+  outline: none;
+  box-shadow: var(--nto-focus-ring);
+  border-radius: 2px;
 }
 
 .nto-footer__legal-sep {
-  color: var(--nto-footer-text);
+  color: var(--nto-cream-100);
+  opacity: 0.3;
   font-size: 0.8rem;
 }
 

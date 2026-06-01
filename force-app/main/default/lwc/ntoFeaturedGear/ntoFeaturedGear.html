@@ -1,9 +1,7 @@
 <template>
-  <div class="nto-featured-gear slds-p-around_medium">
-    <template if:true={isLoading}>
-      <div
-        class="nto-featured-gear__loading slds-is-relative slds-p-vertical_x-large"
-      >
+  <div class="nto-featured-gear">
+    <template lwc:if={isLoading}>
+      <div class="nto-featured-gear__loading" role="status">
         <lightning-spinner
           alternative-text="Loading featured gear"
           size="medium"
@@ -11,76 +9,74 @@
       </div>
     </template>
 
-    <template if:true={hasError}>
+    <template lwc:elseif={hasError}>
       <div
-        class="nto-featured-gear__panel nto-featured-gear__panel_error slds-p-around_medium slds-box"
+        class="nto-featured-gear__panel nto-featured-gear__panel_error"
         role="alert"
       >
-        <p class="slds-text-heading_small slds-m-bottom_x-small">
+        <p class="nto-featured-gear__panel-heading">
           We couldn&rsquo;t load featured gear.
         </p>
-        <p class="slds-text-body_regular">{errorMessage}</p>
+        <p class="nto-featured-gear__panel-body">{errorMessage}</p>
       </div>
     </template>
 
-    <template if:true={isEmpty}>
-      <div
-        class="nto-featured-gear__panel nto-featured-gear__panel_empty slds-p-around_medium slds-box"
-      >
-        <p class="slds-text-body_regular">Featured gear is on its way.</p>
+    <template lwc:elseif={isEmpty}>
+      <div class="nto-featured-gear__panel nto-featured-gear__panel_empty">
+        <p class="nto-featured-gear__panel-body">
+          Featured gear is on its way.
+        </p>
       </div>
     </template>
 
-    <template if:true={hasData}>
-      <div class="slds-grid slds-wrap slds-gutters">
+    <template lwc:elseif={hasData}>
+      <header class="nto-featured-gear__header">
+        <h2 class="nto-featured-gear__title">Picked for you</h2>
+        <p class="nto-featured-gear__subtitle">
+          Recommended for your next trail.
+        </p>
+      </header>
+
+      <div class="nto-featured-gear__grid">
         <template for:each={cards} for:item="item">
-          <div
-            key={item.key}
-            class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-large-size_1-of-4 slds-p-around_x-small"
-          >
-            <article class="nto-featured-gear__card slds-box slds-box_x-small">
-              <div class="nto-featured-gear__media">
-                <template if:true={item.imageUrl}>
-                  <img
-                    class="nto-featured-gear__image"
-                    src={item.imageUrl}
-                    alt={item.name}
-                  />
-                </template>
-                <template if:false={item.imageUrl}>
-                  <div
-                    class="nto-featured-gear__placeholder"
-                    aria-hidden="true"
-                  ></div>
-                </template>
-              </div>
-              <div class="nto-featured-gear__body slds-p-top_small">
-                <h3
-                  class="nto-featured-gear__name slds-text-heading_small slds-truncate"
-                  title={item.name}
-                >
-                  {item.name}
-                </h3>
-                <template if:true={item.family}>
-                  <p
-                    class="nto-featured-gear__family slds-text-body_small slds-truncate"
-                    title={item.family}
-                  >
-                    {item.family}
-                  </p>
-                </template>
-                <p
-                  class="nto-featured-gear__price slds-text-heading_x-small slds-m-top_x-small"
-                >
+          <article key={item.key} class="nto-featured-gear__card">
+            <div class="nto-featured-gear__media">
+              <template lwc:if={item.imageUrl}>
+                <img
+                  class="nto-featured-gear__image"
+                  src={item.imageUrl}
+                  alt={item.name}
+                />
+              </template>
+              <template lwc:else>
+                <div
+                  class="nto-featured-gear__placeholder"
+                  role="img"
+                  aria-label={item.name}
+                ></div>
+              </template>
+            </div>
+            <div class="nto-featured-gear__body">
+              <h3 class="nto-featured-gear__name" title={item.name}>
+                {item.name}
+              </h3>
+              <template lwc:if={item.family}>
+                <p class="nto-featured-gear__family" title={item.family}>
+                  {item.family}
+                </p>
+              </template>
+              <div class="nto-featured-gear__footer">
+                <p class="nto-featured-gear__price">
                   <lightning-formatted-number
                     value={item.price}
                     format-style="currency"
                     currency-code="USD"
                   ></lightning-formatted-number>
                 </p>
+                <a href="#" class="nto-featured-gear__cta">View details</a>
               </div>
-            </article>
-          </div>
+            </div>
+          </article>
         </template>
       </div>
     </template>

@@ -1,0 +1,67 @@
+/*
+ * ntoBrandTokens.css — NTO global design tokens
+ * Import this file into every NTO LWC that needs the brand palette:
+ *   @import "c/ntoBrandTokens";
+ *
+ * All component CSS then references these vars; no hardcoded hex anywhere else.
+ */
+
+:host {
+  /* ── Colour palette ── */
+  --nto-forest-900: #1f3a2e; /* primary, headings, footer bg        */
+  --nto-forest-700: #2f5240; /* hover, active accents               */
+  --nto-cream-50: #faf6ee; /* page background                      */
+  --nto-cream-100: #f2ebdb; /* card surfaces, hero bg               */
+  --nto-sand-200: #e6dcc4; /* dividers, input bg                   */
+  --nto-orange-500: #d9601a; /* primary CTA, loyalty accents        */
+  --nto-orange-600: #b84e12; /* CTA hover                           */
+  --nto-ink-900: #1a1a1a; /* body text                             */
+  --nto-ink-500: #6b6b66; /* secondary text                        */
+  --nto-success: #2e7d4f;
+  --nto-warning: #c77a1a;
+  --nto-danger: #b5371a;
+
+  /* ── Typography ── */
+  --nto-font-serif: "Fraunces", "Playfair Display", Georgia, serif;
+  --nto-font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --nto-font-mono: "SF Mono", "Roboto Mono", "Cascadia Code", monospace;
+
+  /* ── Spacing ── */
+  --nto-space-xs: 0.375rem;
+  --nto-space-sm: 0.75rem;
+  --nto-space-md: 1rem;
+  --nto-space-lg: 1.5rem;
+  --nto-space-xl: 2.5rem;
+
+  /* ── Radius ── */
+  --nto-radius-sm: 6px;
+  --nto-radius-md: 10px;
+  --nto-radius-lg: 16px;
+  --nto-radius-pill: 99px;
+
+  /* ── Shadows ── */
+  --nto-shadow-card:
+    0 1px 3px rgba(31, 58, 46, 0.06), 0 4px 12px rgba(31, 58, 46, 0.05);
+  --nto-shadow-hover: 0 4px 16px rgba(31, 58, 46, 0.14);
+
+  /* ── Focus ring ── */
+  --nto-focus-ring: 0 0 0 2px #fff, 0 0 0 4px #d9601a;
+
+  /* ── Status pill tints ── */
+  --nto-pill-delivered-bg: #d4edde;
+  --nto-pill-delivered-text: #1a5c36;
+  --nto-pill-shipped-bg: #d6e8de;
+  --nto-pill-shipped-text: #1f3a2e;
+  --nto-pill-processing-bg: #fdecd4;
+  --nto-pill-processing-text: #7a3e00;
+  --nto-pill-returned-bg: #fad9d3;
+  --nto-pill-returned-text: #7a1a08;
+  --nto-pill-new-bg: #dceef8;
+  --nto-pill-new-text: #0c3d5e;
+  --nto-pill-working-bg: #fdecd4;
+  --nto-pill-working-text: #7a3e00;
+  --nto-pill-escalated-bg: #fad9d3;
+  --nto-pill-escalated-text: #7a1a08;
+  --nto-pill-closed-bg: #d4edde;
+  --nto-pill-closed-text: #1a5c36;
+}
